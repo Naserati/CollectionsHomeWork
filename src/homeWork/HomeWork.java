@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 class HomeWork {
     private Map<String, Integer> map = new TreeMap<>();
+    private Path path;
 
     File enterFilePath() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -19,7 +20,7 @@ class HomeWork {
         try {
             while (true) {
                 String filePath = reader.readLine();
-                Path path = Paths.get(filePath);
+                path = Paths.get(filePath);
                 File file = new File(path.toUri());
                 if (!file.isFile()) System.out.println("Введен не правильный путь. Попробуйте снова:");
                 else return file;
@@ -118,5 +119,9 @@ class HomeWork {
             });
             System.out.println("Количество повторений: " + max);
         }
+    }
+
+    Path getPath() {
+        return path;
     }
 }
