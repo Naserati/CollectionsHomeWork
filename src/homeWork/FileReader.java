@@ -1,4 +1,4 @@
-package fileReader;
+package homeWork;
 
 import java.io.*;
 import java.nio.file.Path;
