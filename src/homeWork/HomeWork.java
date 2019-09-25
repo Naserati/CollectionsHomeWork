@@ -49,12 +49,14 @@ class HomeWork {
         map.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEach(x -> System.out.println(x.getKey() + " : " + x.getValue()));
+
+        printMostPopularWord();
     }
 
     void printMostPopularWord() {
         if (!map.isEmpty()) {
             int max = Collections.max(map.values());
-            System.out.println("\nЧаще всего встречались следующие слова:");
+            System.out.println("\nЧаще всего встречаются следующие слова:");
             map.forEach((String k, Integer v) -> {
                 if (v == max) System.out.println(k);
             });

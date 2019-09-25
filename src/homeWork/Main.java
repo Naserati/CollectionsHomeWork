@@ -14,6 +14,5 @@ public class Main {
         File file = homeWork.enterFilePath();
         List<String> wordsList = homeWork.readFile(file);
         homeWork.printCountWords(wordsList);
-        homeWork.printMostPopularWord();
     }
 }
