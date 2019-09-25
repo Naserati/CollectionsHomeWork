@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-class FileReader {
+class HomeWork {
     private Map<String, Integer> map = new TreeMap<>();
 
     File enterFilePath() {

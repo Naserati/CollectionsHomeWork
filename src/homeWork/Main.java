@@ -10,10 +10,10 @@ public class Main {
     }
 
     static void startProgram() {
-        FileReader fileReader = new FileReader();
-        File file = fileReader.enterFilePath();
-        List<String> wordsList = fileReader.readFile(file);
-        fileReader.printCountWords(wordsList);
-        fileReader.printMostPopularWord();
+        HomeWork homeWork = new HomeWork();
+        File file = homeWork.enterFilePath();
+        List<String> wordsList = homeWork.readFile(file);
+        homeWork.printCountWords(wordsList);
+        homeWork.printMostPopularWord();
     }
 }
