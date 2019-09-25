@@ -35,7 +35,7 @@ class FileReader {
                 wordsList.addAll(buffer);
             }
             wordsList.sort(Comparator.naturalOrder());
-            System.out.println("Список слов из файла в алфавитном порядке:\n" + wordsList);
+            System.out.println("Список всех встречаемых в файле слов в алфавитном порядке:\n" + wordsList);
             return wordsList;
         } catch (IOException e) {
             e.printStackTrace();
