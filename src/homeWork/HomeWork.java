@@ -88,10 +88,8 @@ class HomeWork {
      */
     List<String> readFileToString(Path path) {
         try {
-            List<String> wordsList = new ArrayList<>(
-                    Arrays.asList(Files.readString(Paths.get("test.txt")).split("[^A-zЁёА-я]+")));
-            wordsList.removeIf(String::isEmpty);
-            wordsList.sort(Comparator.naturalOrder());
+            List<String> wordsList = new ArrayList<>(Arrays.asList(Files.readString(path).split("[^A-zЁёА-я]+")))
+                    .stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
             System.out.println("Список всех встречаемых в файле слов в алфавитном порядке:\n" + wordsList);
             return wordsList;
         } catch (IOException e) {
