@@ -48,7 +48,7 @@ class FileReader {
         wordsList.forEach(s -> map.merge(s.toLowerCase(), 1, Integer::sum));
         map.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(System.out::println);
+                .forEach(x -> System.out.println(x.getKey() + " : " + x.getValue()));
     }
 
     void printMostPopularWord() {
