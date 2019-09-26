@@ -38,21 +38,20 @@ class HomeWork {
      * @param file - передаём в метод File
      */
     List<String> readFile(File file) {
+        List<String> wordsList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
-            List<String> wordsList = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {
-                List<String> buffer = new ArrayList<>(Arrays.asList(line.split("[^A-zЁёА-я]+")));
+                List<String> buffer = new ArrayList<>(Arrays.asList(line.split("[^A-zЁёА-я-]+[^A-zЁёА-я]?|[\\[\\]]+")));
                 buffer.removeIf(String::isEmpty);
                 wordsList.addAll(buffer);
             }
             wordsList.sort(Comparator.naturalOrder());
             System.out.println("Список всех встречаемых в файле слов в алфавитном порядке:\n" + wordsList);
-            return wordsList;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return wordsList;
     }
 
     /**
@@ -66,17 +65,16 @@ class HomeWork {
         try {
             List<String> lines = Files.lines(path).map(String::toLowerCase).collect(Collectors.toList());
             for (String line : lines) {
-                buffer = new ArrayList<>(Arrays.asList(line.split("[^A-zЁёА-я]+")));
+                buffer = new ArrayList<>(Arrays.asList(line.split("[^A-zЁёА-я-]+[^A-zЁёА-я]?|[\\[\\]]+")));
                 buffer.removeIf(String::isEmpty);
                 wordsList.addAll(buffer);
             }
             wordsList.sort(Comparator.naturalOrder());
             System.out.println("Список всех встречаемых в файле слов в алфавитном порядке:\n" + wordsList);
-            return wordsList;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return wordsList;
     }
 
     /**
@@ -87,15 +85,15 @@ class HomeWork {
      * @param path - передаем в метод Path
      */
     List<String> readFileToString(Path path) {
+        List<String> wordsList = null;
         try {
-            List<String> wordsList = new ArrayList<>(Arrays.asList(Files.readString(path).split("[^A-zЁёА-я]+")))
-                    .stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+            wordsList = new ArrayList<>(Arrays.asList(Files.readString(path).split("[^A-zЁёА-я-]+[^A-zЁёА-я]?|[\\[\\]]+")))
+                    .stream().filter(v -> !v.isEmpty()).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
             System.out.println("Список всех встречаемых в файле слов в алфавитном порядке:\n" + wordsList);
-            return wordsList;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return wordsList;
     }
 
     void printCountWords(List<String> wordsList) {
@@ -108,13 +106,11 @@ class HomeWork {
         printMostPopularWord();
     }
 
-    void printMostPopularWord() {
+    private void printMostPopularWord() {
         if (!map.isEmpty()) {
             int max = Collections.max(map.values());
             System.out.println("\nЧаще всего встречаются  следующие слова:");
-            map.forEach((String k, Integer v) -> {
-                if (v == max) System.out.println(k);
-            });
+            map.entrySet().stream().filter(v -> v.getValue() == max).forEach((k) -> System.out.println(k.getKey()));
             System.out.println("Количество повторений: " + max);
         }
     }
